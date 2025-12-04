@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using ATRI.OneBot.JsonConverters;
 
 namespace ATRI.OneBot.Events;
 

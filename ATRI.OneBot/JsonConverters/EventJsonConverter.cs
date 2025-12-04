@@ -1,8 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Nodes;
+using ATRI.OneBot.Events;
 
-namespace ATRI.OneBot.Events;
+namespace ATRI.OneBot.JsonConverters;
 
 public class EventJsonConverter : JsonConverter<Event>
 {
