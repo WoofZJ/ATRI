@@ -50,6 +50,12 @@ public class EventJsonConverter : JsonConverter<Event>
                 "group" => node.Deserialize<GroupMessageEvent>(options),
                 _ => throw new NotSupportedException("Unsupported message_type")
             },
+            "request" => node?["request_type"]?.GetValue<string>() switch
+            {
+                "friend" => node.Deserialize<FriendRequestEvent>(options),
+                "group" => node.Deserialize<GroupRequestEvent>(options),
+                _ => throw new NotSupportedException("Unsupported request_type")
+            },
             _ => throw new NotSupportedException("Unsupported post_type")
         };
     }
