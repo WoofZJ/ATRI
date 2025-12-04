@@ -25,7 +25,26 @@ public class EventJsonConverter : JsonConverter<Event>
                 "lifecycle" => node.Deserialize<LifecycleEvent>(options),
                 _ => throw new NotSupportedException("Unsupported meta_event_type")
             },
-            _ => null
+            "notice" => node?["notice_type"]?.GetValue<string>() switch
+            {
+                "group_upload" => node.Deserialize<GroupUploadEvent>(options),
+                "group_admin" => node.Deserialize<GroupAdminEvent>(options),
+                "group_decrease" => node.Deserialize<GroupDecreaseEvent>(options),
+                "group_increase" => node.Deserialize<GroupIncreaseEvent>(options),
+                "group_ban" => node.Deserialize<GroupBanEvent>(options),
+                "friend_add" => node.Deserialize<FriendAddEvent>(options),
+                "group_recall" => node.Deserialize<GroupRecallEvent>(options),
+                "friend_recall" => node.Deserialize<FriendRecallEvent>(options),
+                "notify" => node?["sub_type"]?.GetValue<string>() switch
+                {
+                    "poke" => node.Deserialize<PokeEvent>(options),
+                    "lucky_king" => node.Deserialize<LuckyKingEvent>(options),
+                    "honor" => node.Deserialize<HonorEvent>(options),
+                    _ => throw new NotSupportedException("Unsupported notify sub_type")
+                },
+                _ => throw new NotSupportedException("Unsupported notice_type")
+            },
+            _ => throw new NotSupportedException("Unsupported post_type")
         };
     }
 
