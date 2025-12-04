@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="ATRI.Core/ATRI.Core.csproj" />
   <Project Path="ATRI.OneBot/ATRI.OneBot.csproj" />
+  <Project Path="ATRI.Test/ATRI.Test.csproj" />
 </Solution>
