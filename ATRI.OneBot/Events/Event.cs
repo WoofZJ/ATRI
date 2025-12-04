@@ -44,6 +44,12 @@ public class EventJsonConverter : JsonConverter<Event>
                 },
                 _ => throw new NotSupportedException("Unsupported notice_type")
             },
+            "message" => node?["message_type"]?.GetValue<string>() switch
+            {
+                "private" => node.Deserialize<PrivateMessageEvent>(options),
+                "group" => node.Deserialize<GroupMessageEvent>(options),
+                _ => throw new NotSupportedException("Unsupported message_type")
+            },
             _ => throw new NotSupportedException("Unsupported post_type")
         };
     }
