@@ -1,6 +1,6 @@
 namespace ATRI.OneBot.Events;
 
-public abstract record MetaEvent : Event
+public abstract record MetaEvent : OneBotEvent
 {
     public string MetaEventType { get; init; } = string.Empty;
 }

@@ -1,10 +1,8 @@
-using System.Text.Json.Serialization;
-using ATRI.OneBot.JsonConverters;
-
 namespace ATRI.OneBot.Events;
 
-[JsonConverter(typeof(EventJsonConverter))]
-public abstract record Event
+public abstract record Event;
+
+public abstract record OneBotEvent : Event
 {
     public long Time { get; init; }
     public long SelfId { get; init; }

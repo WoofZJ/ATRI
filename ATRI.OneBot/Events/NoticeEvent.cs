@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ATRI.OneBot.Events;
 
-public abstract record NoticeEvent : Event
+public abstract record NoticeEvent : OneBotEvent
 {
     public string NoticeType { get; init; } = string.Empty;
 }

@@ -3,7 +3,7 @@ using ATRI.OneBot.Messages;
 
 namespace ATRI.OneBot.Events;
 
-public abstract record MessageEvent : Event
+public abstract record MessageEvent : OneBotEvent
 {
     public string MessageType { get; init; } = string.Empty;
 }
