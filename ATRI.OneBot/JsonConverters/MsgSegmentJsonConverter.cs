@@ -19,6 +19,7 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
             {
                 "text" => data.Deserialize<PlainText>(options),
                 "image" => data.Deserialize<ImageRecv>(options),
+                "face" => data.Deserialize<Face>(options),
                 _ => throw new NotSupportedException($"Unsupported MsgSegment type")
             };
         }
@@ -32,6 +33,7 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
         {
             PlainText => "text",
             Image => "image",
+            Face => "face",
             _ => throw new NotSupportedException($"Unsupported MsgSegment type")
         });
         writer.WritePropertyName("data");

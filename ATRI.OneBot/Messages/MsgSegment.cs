@@ -20,3 +20,8 @@ public record ImageRecv : MsgSegment
     [JsonPropertyName("subType")]
     public int SubType { get; init; }
 }
+
+public record Face(
+    int Id,
+    int? SubType = null
+) : MsgSegment;

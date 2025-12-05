@@ -41,5 +41,18 @@ public class MsgSegmentTests
             """;
         Assert.Equal(segmentRecv, OneBotSerializer.Deserialize<MsgSegment>(jsonRecv));
     }
+
+    [Fact]
+    public void FaceTest()
+    {
+        var segment = new Face(123, 1);
+        var json = """
+            {"type":"face","data":{"id":123,"sub_type":1}}
+            """;
+        // Serialize test
+        Assert.Equal(json, OneBotSerializer.Serialize(segment));
+        // Deserialize test
+        Assert.Equal(segment, OneBotSerializer.Deserialize<MsgSegment>(json));
+    }
 }
 
