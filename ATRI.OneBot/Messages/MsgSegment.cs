@@ -25,3 +25,10 @@ public record Face(
     int Id,
     int? SubType = null
 ) : MsgSegment;
+
+public record At(
+    long Qq,
+    string? Name = null
+) : MsgSegment;
+
+public record AtAll(string Qq = "all") : MsgSegment;

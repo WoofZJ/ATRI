@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using ATRI.OneBot.Messages;
 
 namespace ATRI.OneBot.JsonConverters;
@@ -8,6 +9,7 @@ public static class OneBotSerializer
     private static readonly JsonSerializerOptions Options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
         Converters =
         {
             new EventJsonConverter(),

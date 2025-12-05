@@ -54,5 +54,31 @@ public class MsgSegmentTests
         // Deserialize test
         Assert.Equal(segment, OneBotSerializer.Deserialize<MsgSegment>(json));
     }
+
+    [Fact]
+    public void AtTest()
+    {
+        var segment = new At(10001, "TestUser");
+        var json = """
+            {"type":"at","data":{"qq":"10001","name":"TestUser"}}
+            """;
+        // Serialize test
+        Assert.Equal(json, OneBotSerializer.Serialize(segment));
+        // Deserialize test
+        Assert.Equal(segment, OneBotSerializer.Deserialize<MsgSegment>(json));
+    }
+
+    [Fact]
+    public void AtAllTest()
+    {
+        var segment = new AtAll();
+        var json = """
+            {"type":"at","data":{"qq":"all"}}
+            """;
+        // Serialize test
+        Assert.Equal(json, OneBotSerializer.Serialize(segment));
+        // Deserialize test
+        Assert.Equal(segment, OneBotSerializer.Deserialize<MsgSegment>(json));
+    }
 }
 

@@ -20,6 +20,7 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
                 "text" => data.Deserialize<PlainText>(options),
                 "image" => data.Deserialize<ImageRecv>(options),
                 "face" => data.Deserialize<Face>(options),
+                "at" => data["qq"]?.GetValue<string>() == "all" ? new AtAll() : data.Deserialize<At>(options),
                 _ => throw new NotSupportedException($"Unsupported MsgSegment type")
             };
         }
@@ -34,10 +35,30 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
             PlainText => "text",
             Image => "image",
             Face => "face",
+            At => "at",
+            AtAll => "at",
             _ => throw new NotSupportedException($"Unsupported MsgSegment type")
         });
         writer.WritePropertyName("data");
-        JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        switch (value)
+        {
+            case At at:
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("qq", at.Qq.ToString());
+                    if (at.Name != null)
+                    {
+                        writer.WriteString("name", at.Name);
+                    }
+                    writer.WriteEndObject();
+                    break;
+                }
+            default:
+                {
+                    JsonSerializer.Serialize(writer, value, value.GetType(), options);
+                    break;
+                }
+        }
         writer.WriteEndObject();
     }
 }
