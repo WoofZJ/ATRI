@@ -80,7 +80,16 @@ public class EventJsonConverter : JsonConverter<Event>
                 "get_group_info" => node.Deserialize<ApiEvent<GetGroupInfoData>>(options),
                 "get_group_list" => node.Deserialize<ApiEvent<GetGroupListData>>(options),
                 "get_group_member_info" => node.Deserialize<ApiEvent<GetGroupMemberInfoData>>(options),
-                "get_group_member_list" => node.Deserialize<ApiEvent<GetGroupMemberListData>>(options),
+                "get_group_member_list" => ((Func<Event?>)(() =>{
+                    var list = node["data"].Deserialize<List<GetGroupMemberInfoData>>(options);
+                    var data = new GetGroupMemberListData(list);
+                    ApiEvent<GetGroupMemberListData> evt = new ApiEvent<GetGroupMemberListData>
+                    {
+                        Data = data,
+                        Echo = node["echo"]!.GetValue<string>()
+                    };
+                    return evt;
+                }))(),
                 _ => throw new NotSupportedException("Unsupported API event type")
             };
 
