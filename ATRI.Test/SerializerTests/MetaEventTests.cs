@@ -12,7 +12,7 @@ public class MetaEventTests
             {"time":1764859724,"self_id":10000,"post_type":"meta_event","meta_event_type":"lifecycle","sub_type":"connect"}
             """;
         var evt = OneBotSerializer.Deserialize<Event>(json);
-        Assert.Equal(typeof(LifecycleEvent), evt?.GetType());
+        Assert.IsType<LifecycleEvent>(evt);
         Assert.Equal(evt, new LifecycleEvent
         {
             Time = 1764859724,
@@ -30,7 +30,7 @@ public class MetaEventTests
             {"time":1764860804,"self_id":10000,"post_type":"meta_event","meta_event_type":"heartbeat","status":{"online":true,"good":true},"interval":60000}
             """;
         var evt = OneBotSerializer.Deserialize<Event>(json);
-        Assert.Equal(typeof(HeartbeatEvent), evt?.GetType());
+        Assert.IsType<HeartbeatEvent>(evt);
         Assert.Equal(evt, new HeartbeatEvent
         {
             Time = 1764860804,
