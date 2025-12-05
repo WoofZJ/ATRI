@@ -18,6 +18,7 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
             return type switch
             {
                 "text" => data.Deserialize<PlainText>(options),
+                "image" => data.Deserialize<ImageRecv>(options),
                 _ => throw new NotSupportedException($"Unsupported MsgSegment type")
             };
         }
@@ -30,6 +31,7 @@ public class MsgSegmentJsonConverter : JsonConverter<MsgSegment>
         writer.WriteString("type", value switch
         {
             PlainText => "text",
+            Image => "image",
             _ => throw new NotSupportedException($"Unsupported MsgSegment type")
         });
         writer.WritePropertyName("data");
